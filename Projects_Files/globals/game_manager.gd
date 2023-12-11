@@ -11,16 +11,13 @@ var is_running_mode := false
 
 func eat_small_pellet() -> void:
 	score +=2
-	
+
 func eat_large_pellet() -> void:
 	score += 10 
 	_enter_running_mode()
 
-
 func eat_ghost() -> void:
 	score += 100
-
-
 
 func _enter_running_mode() -> void:
 	is_running_mode = true

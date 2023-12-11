@@ -10,7 +10,6 @@ enum GhostMode {NORMAL,RUNNING,RUNNING_ENDING}
 @export var release_time := 1
 @export var eaten_time := 3
 
-
 var ghost_color := "red"
 var inside_cage := true
 var mode := GhostMode.NORMAL
@@ -19,7 +18,6 @@ var start_position: Vector2
 
 @onready var animated_sprite_2d: AnimatedSprite2D = %AnimatedSprite2D
 @onready var gate_detector: Area2D = %GateDetector
-
 
 func _ready() -> void:
 	GameManager.pacman_died.connect(_restart)
@@ -83,7 +81,7 @@ func _get_next_direction() -> Vector2:
 			return Vector2.DOWN
 	else:
 		return DIRECTIONS.pick_random()
-	
+
 func kill() -> void:
 	global_position = start_position
 	direction = Vector2.UP
@@ -91,11 +89,10 @@ func kill() -> void:
 	set_collision_mask_value(5,true)
 	await get_tree().create_timer(eaten_time).timeout
 	_release_ghost()
-	
+
 func _on_running_mode_entered() -> void:
 	mode = GhostMode.RUNNING
-	
-	
+
 func _on_running_mode_ending() -> void:
 	mode = GhostMode.RUNNING_ENDING
 
@@ -105,7 +102,7 @@ func _on_running_mode_ended() -> void:
 func _on_gate_detector_body_exited(_body: Node2D) -> void:
 	inside_cage = false
 	set_collision_mask_value(5,true)
-	
+
 func _restart() -> void:
 	global_position = start_position
 	direction = Vector2.UP

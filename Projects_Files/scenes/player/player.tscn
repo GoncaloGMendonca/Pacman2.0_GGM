@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=3 uid="uid://cfaf8ljjhivi0"]
+[gd_scene load_steps=24 format=3 uid="uid://cfaf8ljjhivi0"]
 
 [ext_resource type="Script" path="res://scenes/player/player.gd" id="1_2x4cs"]
 [ext_resource type="Texture2D" uid="uid://cu72hytvs5ju6" path="res://assets/tilemaps/spritesheet.png" id="1_ajc2q"]
@@ -143,6 +143,9 @@ animations = [{
 "speed": 16.0
 }]
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_j7psu"]
+size = Vector2(22, 22)
+
 [node name="Player" type="CharacterBody2D"]
 collision_layer = 2
 collision_mask = 60
@@ -157,8 +160,18 @@ animation = &"down"
 
 [node name="DeathSound" type="AudioStreamPlayer" parent="."]
 unique_name_in_owner = true
+process_mode = 3
 stream = ExtResource("3_urxob")
 
 [node name="EatGhostSound" type="AudioStreamPlayer" parent="."]
 unique_name_in_owner = true
 stream = ExtResource("4_gqp0m")
+
+[node name="GhostDetector" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="GhostDetector"]
+shape = SubResource("RectangleShape2D_j7psu")
+
+[connection signal="body_entered" from="GhostDetector" to="." method="_on_ghost_detector_body_entered"]

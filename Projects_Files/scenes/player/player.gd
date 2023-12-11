@@ -12,7 +12,6 @@ var start_position: Vector2
 @onready var death_sound: AudioStreamPlayer = %DeathSound
 @onready var eat_ghost_sound: AudioStreamPlayer = %EatGhostSound
 
-
 func _ready() -> void:
 	animated_sprite_2d.play("left")
 	start_position = position
@@ -30,8 +29,6 @@ func _unhandled_input(event: InputEvent) -> void:
 	elif event.is_action_pressed("right"):
 		facing_direction = Direction.RIGHT
 		animated_sprite_2d.play("right")
-		
-
 
 func _physics_process(delta: float) -> void:
 	var direction := Vector2.ZERO
@@ -47,33 +44,23 @@ func _physics_process(delta: float) -> void:
 			direction = Vector2.RIGHT
 			
 	velocity = direction * speed
-	
 	var collision := move_and_collide(velocity * delta)
 	
 	if collision:
-		if collision.get_collider() is CharacterBody2D:
-			#collide com a ghost
-				if GameManager.is_running_mode:
-					collision.get_collider().kill()
-					GameManager.eat_ghost()
-					eat_ghost_sound.play()
-				else:
-					_die()
-					death_sound.play()
-		else:
+		if not collision.get_collider() is CharacterBody2D:
 			#collide com a parede
 			move_and_collide(previous_direction * speed * delta)
 	else:
 		previous_direction = direction 
 
 func _die() -> void:
+	death_sound.play()
 	animated_sprite_2d.pause()
 	var tween := get_tree().create_tween()
 	tween.tween_property(self,"modulate",Color.TRANSPARENT,2)
 	tween.tween_callback(_restart)
-	process_mode = Node.PROCESS_MODE_DISABLED
-	
-	
+	call_deferred("set_process_mode",Node.PROCESS_MODE_DISABLED)
+
 func _restart() -> void:
 	modulate = Color.WHITE
 	process_mode = Node.PROCESS_MODE_INHERIT
@@ -82,5 +69,13 @@ func _restart() -> void:
 	animated_sprite_2d.play("left")
 	GameManager.lives -= 1
 	GameManager.pacman_died.emit()
-	
-	
+
+
+func _on_ghost_detector_body_entered(body: Node2D) -> void:
+	#collide com a ghost
+	if GameManager.is_running_mode:
+		body.kill()
+		GameManager.eat_ghost()
+		eat_ghost_sound.play()
+	else:
+		_die()
