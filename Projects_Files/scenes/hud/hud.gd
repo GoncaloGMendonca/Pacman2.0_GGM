@@ -6,6 +6,7 @@ extends CanvasLayer
 @onready var score: Label = %Score
 
 func _process(_delta: float) -> void:
+	#trocar isto tudo para um if e mudar isso TALVEZ UM MATCH CASE
 	life_1.visible = GameManager.lives > 0 
 	life_2.visible = GameManager.lives > 1 
 	life_3.visible = GameManager.lives > 2 

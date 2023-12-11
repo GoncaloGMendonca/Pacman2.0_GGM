@@ -1,0 +1,14 @@
+[gd_resource type="Theme" load_steps=3 format=3 uid="uid://d30k2suey1e2l"]
+
+[ext_resource type="FontFile" uid="uid://cilt24tf7xu7s" path="res://assets/fonts/upheavtt.ttf" id="1_5j8yi"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ym40e"]
+bg_color = Color(0.160784, 0.505882, 0.784314, 1)
+
+[resource]
+Button/font_sizes/font_size = 33
+Button/fonts/font = ExtResource("1_5j8yi")
+Button/styles/normal = SubResource("StyleBoxFlat_ym40e")
+Label/font_sizes/font_size = 39
+Label/fonts/font = ExtResource("1_5j8yi")
+VBoxContainer/constants/separation = 24

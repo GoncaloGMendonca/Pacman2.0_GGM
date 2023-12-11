@@ -70,7 +70,6 @@ func _restart() -> void:
 	GameManager.lives -= 1
 	GameManager.pacman_died.emit()
 
-
 func _on_ghost_detector_body_entered(body: Node2D) -> void:
 	#collide com a ghost
 	if GameManager.is_running_mode:

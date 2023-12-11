@@ -1,6 +1,16 @@
-[gd_scene load_steps=2 format=3 uid="uid://bj4vlxpic2s6a"]
+[gd_scene load_steps=6 format=3 uid="uid://bj4vlxpic2s6a"]
 
 [ext_resource type="Script" path="res://scenes/Main_menu/main_menu.gd" id="1_gjxet"]
+[ext_resource type="Theme" uid="uid://d30k2suey1e2l" path="res://assets/GameTheme.tres" id="2_35yx3"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ulb0q"]
+bg_color = Color(0.953125, 0.496094, 0.136719, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_are2h"]
+bg_color = Color(0.337255, 0.345098, 0.388235, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_3kb3w"]
+bg_color = Color(0.898039, 0.439216, 0.447059, 1)
 
 [node name="MainMenu" type="CanvasLayer"]
 script = ExtResource("1_gjxet")
@@ -17,28 +27,39 @@ offset_right = 135.0
 offset_bottom = 65.5
 grow_horizontal = 2
 grow_vertical = 2
+theme = ExtResource("2_35yx3")
 
 [node name="Label" type="Label" parent="VBoxContainer"]
 layout_mode = 2
+theme = ExtResource("2_35yx3")
 text = "PacMan 2.0 By GGM"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Button" type="Button" parent="VBoxContainer"]
+[node name="Level1_Button" type="Button" parent="VBoxContainer"]
 layout_mode = 2
+theme = ExtResource("2_35yx3")
 text = "Level 1"
 
-[node name="Button2" type="Button" parent="VBoxContainer"]
+[node name="Level2_Button" type="Button" parent="VBoxContainer"]
 layout_mode = 2
+theme = ExtResource("2_35yx3")
+theme_override_styles/normal = SubResource("StyleBoxFlat_ulb0q")
 text = "Level 2"
 
-[node name="Button3" type="Button" parent="VBoxContainer"]
+[node name="Level3_Button" type="Button" parent="VBoxContainer"]
 layout_mode = 2
+theme = ExtResource("2_35yx3")
+theme_override_styles/normal = SubResource("StyleBoxFlat_are2h")
 text = "Level 3"
 
 [node name="QuitButton" type="Button" parent="VBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
+theme_override_styles/normal = SubResource("StyleBoxFlat_3kb3w")
 text = "Quit Game"
 
+[connection signal="pressed" from="VBoxContainer/Level1_Button" to="." method="_on_level_1_button_pressed"]
+[connection signal="pressed" from="VBoxContainer/Level2_Button" to="." method="_on_level_2_button_pressed"]
+[connection signal="pressed" from="VBoxContainer/Level3_Button" to="." method="_on_level_3_button_pressed"]
 [connection signal="pressed" from="VBoxContainer/QuitButton" to="." method="_on_quit_button_pressed"]
