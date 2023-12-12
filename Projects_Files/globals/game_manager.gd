@@ -27,13 +27,3 @@ func _enter_running_mode() -> void:
 	await get_tree().create_timer(5).timeout
 	running_mode_ended.emit()
 	is_running_mode = false
-
-
-func _extra_life() -> void:
-	# Check if the player has reached the maximum number of lives
-	if GameManager.lives < 3:
-		# Increment the number of lives
-		GameManager.lives += 1
-	else:
-		# Do nothing if the maximum number of lives has been reached
-		pass
