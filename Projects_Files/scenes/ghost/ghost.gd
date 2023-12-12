@@ -1,6 +1,6 @@
 extends CharacterBody2D
 
-const  DIRECTIONS := [Vector2.DOWN,Vector2.UP,Vector2.LEFT,Vector2.RIGHT]
+const DIRECTIONS := [Vector2.DOWN,Vector2.UP,Vector2.LEFT,Vector2.RIGHT]
 
 enum GhostType {RED,YELLOW,PINK,ORANGE}
 enum GhostMode {NORMAL,RUNNING,RUNNING_ENDING}

@@ -15,6 +15,8 @@ func _physics_process(_delta: float) -> void:
 	var local_position := tile_map.to_local(player.global_position)
 	var tile := tile_map.local_to_map(local_position)
 	var data := tile_map.get_cell_tile_data(layer,tile)
+	var used_cells = tile_map.get_used_cells(layer)
+	var random_cell = used_cells[randi() % used_cells.size()]
 	
 	if not data:
 		return

@@ -1,0 +1,71 @@
+[gd_scene load_steps=9 format=3 uid="uid://dbb42usg6haws"]
+
+[ext_resource type="Script" path="res://scenes/PickUp/PickUp.gd" id="1_amcci"]
+[ext_resource type="Texture2D" uid="uid://cu72hytvs5ju6" path="res://assets/tilemaps/spritesheet.png" id="2_j27qw"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_rhy1i"]
+size = Vector2(19, 19)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wd763"]
+atlas = ExtResource("2_j27qw")
+region = Rect2(148, 169, 20, 20)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6ny4a"]
+atlas = ExtResource("2_j27qw")
+region = Rect2(274, 43, 20, 20)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_w0x4o"]
+atlas = ExtResource("2_j27qw")
+region = Rect2(253, 43, 20, 20)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fadsl"]
+atlas = ExtResource("2_j27qw")
+region = Rect2(253, 127, 20, 20)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_gkm8r"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_wd763")
+}],
+"loop": true,
+"name": &"apple",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6ny4a")
+}],
+"loop": true,
+"name": &"bananas",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_w0x4o")
+}],
+"loop": true,
+"name": &"cherry",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_fadsl")
+}],
+"loop": true,
+"name": &"pineapple",
+"speed": 5.0
+}]
+
+[node name="PickUp" type="CharacterBody2D"]
+collision_layer = 4
+collision_mask = 24
+script = ExtResource("1_amcci")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_rhy1i")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+unique_name_in_owner = true
+sprite_frames = SubResource("SpriteFrames_gkm8r")
+animation = &"apple"
