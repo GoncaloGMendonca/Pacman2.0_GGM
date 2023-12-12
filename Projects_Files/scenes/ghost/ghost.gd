@@ -9,7 +9,7 @@ enum GhostMode {NORMAL,RUNNING,RUNNING_ENDING}
 @export var speed := 70 
 @export var release_time := 1
 @export var eaten_time := 3
-
+ 
 var ghost_color := "red"
 var inside_cage := true
 var mode := GhostMode.NORMAL

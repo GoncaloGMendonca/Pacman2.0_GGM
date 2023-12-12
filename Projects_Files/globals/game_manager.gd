@@ -10,7 +10,7 @@ var lives := 3
 var is_running_mode := false
 
 func eat_small_pellet() -> void:
-	score += 20
+	score += 2
 
 func eat_large_pellet() -> void:
 	score += 10 
