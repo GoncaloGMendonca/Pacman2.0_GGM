@@ -74,6 +74,7 @@ sprite_frames = SubResource("SpriteFrames_gkm8r")
 animation = &"apple"
 
 [node name="PlayerDetector" type="Area2D" parent="."]
+unique_name_in_owner = true
 collision_layer = 32
 collision_mask = 2
 

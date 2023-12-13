@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://bmut5qmq81bna"]
+[gd_scene load_steps=13 format=3 uid="uid://bmut5qmq81bna"]
 
 [ext_resource type="Script" path="res://scenes/levels/Level_3/level_3.gd" id="1_n55yd"]
 [ext_resource type="Texture2D" uid="uid://cu72hytvs5ju6" path="res://assets/tilemaps/spritesheet.png" id="2_i442o"]
@@ -9,6 +9,7 @@
 [ext_resource type="AudioStream" uid="uid://58rsc7aoens2" path="res://assets/sounds/pacman_power_pellet.wav" id="7_t3ro1"]
 [ext_resource type="AudioStream" uid="uid://crygn0fnbas2w" path="res://assets/sounds/pacman_waka_waka.wav" id="8_u3wba"]
 [ext_resource type="PackedScene" uid="uid://dewojppfpwri8" path="res://scenes/hud/hud.tscn" id="9_g2kh0"]
+[ext_resource type="PackedScene" uid="uid://dbb42usg6haws" path="res://scenes/PickUp/PickUp.tscn" id="10_a4cwh"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_u7ivr"]
 texture = ExtResource("2_i442o")
@@ -1317,10 +1318,10 @@ texture_region_size = Vector2i(20, 20)
 0:13/0/physics_layer_0/polygon_0/points = PackedVector2Array(-10, -10, 10, -10, 10, 10, -10, 10)
 0:13/0/physics_layer_1/linear_velocity = Vector2(0, 0)
 0:13/0/physics_layer_1/angular_velocity = 0.0
+0:13/0/physics_layer_1/polygon_0/points = PackedVector2Array(-10, -10, 10, -10, 10, 10, -10, 10)
 1:13/0 = 0
 1:13/0/physics_layer_0/linear_velocity = Vector2(0, 0)
 1:13/0/physics_layer_0/angular_velocity = 0.0
-1:13/0/physics_layer_0/polygon_0/points = PackedVector2Array(-10, -10, 10, -10, 10, 10, -10, 10)
 1:13/0/physics_layer_1/linear_velocity = Vector2(0, 0)
 1:13/0/physics_layer_1/angular_velocity = 0.0
 1:13/0/physics_layer_1/polygon_0/points = PackedVector2Array(-10, -10, 10, -10, 10, 10, -10, 10)
@@ -1330,24 +1331,28 @@ texture_region_size = Vector2i(20, 20)
 2:13/0/physics_layer_0/polygon_0/points = PackedVector2Array(-10, -10, 10, -10, 10, 10, -10, 10)
 2:13/0/physics_layer_1/linear_velocity = Vector2(0, 0)
 2:13/0/physics_layer_1/angular_velocity = 0.0
+2:13/0/physics_layer_1/polygon_0/points = PackedVector2Array(-10, -10, 10, -10, 10, 10, -10, 10)
 3:13/0 = 0
 3:13/0/physics_layer_0/linear_velocity = Vector2(0, 0)
 3:13/0/physics_layer_0/angular_velocity = 0.0
 3:13/0/physics_layer_0/polygon_0/points = PackedVector2Array(-10, -10, 10, -10, 10, 10, -10, 10)
 3:13/0/physics_layer_1/linear_velocity = Vector2(0, 0)
 3:13/0/physics_layer_1/angular_velocity = 0.0
+3:13/0/physics_layer_1/polygon_0/points = PackedVector2Array(-10, -10, 10, -10, 10, 10, -10, 10)
 4:13/0 = 0
 4:13/0/physics_layer_0/linear_velocity = Vector2(0, 0)
 4:13/0/physics_layer_0/angular_velocity = 0.0
 4:13/0/physics_layer_0/polygon_0/points = PackedVector2Array(-10, -10, 10, -10, 10, 10, -10, 10)
 4:13/0/physics_layer_1/linear_velocity = Vector2(0, 0)
 4:13/0/physics_layer_1/angular_velocity = 0.0
+4:13/0/physics_layer_1/polygon_0/points = PackedVector2Array(-10, -10, 10, -10, 10, 10, -10, 10)
 5:13/0 = 0
 5:13/0/physics_layer_0/linear_velocity = Vector2(0, 0)
 5:13/0/physics_layer_0/angular_velocity = 0.0
 5:13/0/physics_layer_0/polygon_0/points = PackedVector2Array(-10, -10, 10, -10, 10, 10, -10, 10)
 5:13/0/physics_layer_1/linear_velocity = Vector2(0, 0)
 5:13/0/physics_layer_1/angular_velocity = 0.0
+5:13/0/physics_layer_1/polygon_0/points = PackedVector2Array(-10, -10, 10, -10, 10, 10, -10, 10)
 6:13/0 = 0
 6:13/0/physics_layer_0/linear_velocity = Vector2(0, 0)
 6:13/0/physics_layer_0/angular_velocity = 0.0
@@ -1446,7 +1451,7 @@ unique_name_in_owner = true
 position = Vector2(290, 290)
 
 [node name="Ghost" parent="." instance=ExtResource("4_p364i")]
-position = Vector2(420, 525)
+position = Vector2(420, 510)
 release_time = 4
 
 [node name="Ghost2" parent="." instance=ExtResource("4_p364i")]
@@ -1493,3 +1498,9 @@ stream = ExtResource("8_u3wba")
 volume_db = -7.828
 
 [node name="HUD" parent="." instance=ExtResource("9_g2kh0")]
+
+[node name="PickUp" parent="." instance=ExtResource("10_a4cwh")]
+position = Vector2(350, 70)
+
+[node name="PickUp2" parent="." instance=ExtResource("10_a4cwh")]
+position = Vector2(210, 550)
