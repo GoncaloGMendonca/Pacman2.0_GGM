@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://bhgx1cjnnw5k0"]
+[gd_scene load_steps=13 format=3 uid="uid://bhgx1cjnnw5k0"]
 
 [ext_resource type="Script" path="res://scenes/levels/Level_1/level_1.gd" id="1_eb7tc"]
 [ext_resource type="Texture2D" uid="uid://cu72hytvs5ju6" path="res://assets/tilemaps/spritesheet.png" id="2_gfq0i"]
@@ -9,6 +9,7 @@
 [ext_resource type="AudioStream" uid="uid://58rsc7aoens2" path="res://assets/sounds/pacman_power_pellet.wav" id="7_i5tkf"]
 [ext_resource type="AudioStream" uid="uid://crygn0fnbas2w" path="res://assets/sounds/pacman_waka_waka.wav" id="8_dnyje"]
 [ext_resource type="PackedScene" uid="uid://dewojppfpwri8" path="res://scenes/hud/hud.tscn" id="9_ebmw5"]
+[ext_resource type="PackedScene" uid="uid://dbb42usg6haws" path="res://scenes/PickUp/PickUp.tscn" id="10_07gjf"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_u7ivr"]
 texture = ExtResource("2_gfq0i")
@@ -259,11 +260,13 @@ texture_region_size = Vector2i(20, 20)
 12:2/0/physics_layer_0/angular_velocity = 0.0
 12:2/0/physics_layer_1/linear_velocity = Vector2(0, 0)
 12:2/0/physics_layer_1/angular_velocity = 0.0
+12:2/0/custom_data_2 = true
 13:2/0 = 0
 13:2/0/physics_layer_0/linear_velocity = Vector2(0, 0)
 13:2/0/physics_layer_0/angular_velocity = 0.0
 13:2/0/physics_layer_1/linear_velocity = Vector2(0, 0)
 13:2/0/physics_layer_1/angular_velocity = 0.0
+13:2/0/custom_data_2 = true
 14:2/0 = 0
 14:2/0/physics_layer_0/linear_velocity = Vector2(0, 0)
 14:2/0/physics_layer_0/angular_velocity = 0.0
@@ -602,6 +605,7 @@ texture_region_size = Vector2i(20, 20)
 12:6/0/physics_layer_0/angular_velocity = 0.0
 12:6/0/physics_layer_1/linear_velocity = Vector2(0, 0)
 12:6/0/physics_layer_1/angular_velocity = 0.0
+12:6/0/custom_data_2 = true
 13:6/0 = 0
 13:6/0/physics_layer_0/linear_velocity = Vector2(0, 0)
 13:6/0/physics_layer_0/angular_velocity = 0.0
@@ -747,6 +751,7 @@ texture_region_size = Vector2i(20, 20)
 7:8/0/physics_layer_0/angular_velocity = 0.0
 7:8/0/physics_layer_1/linear_velocity = Vector2(0, 0)
 7:8/0/physics_layer_1/angular_velocity = 0.0
+7:8/0/custom_data_2 = true
 8:8/0 = 0
 8:8/0/physics_layer_0/linear_velocity = Vector2(0, 0)
 8:8/0/physics_layer_0/angular_velocity = 0.0
@@ -1311,6 +1316,8 @@ custom_data_layer_0/name = "small_pellet"
 custom_data_layer_0/type = 1
 custom_data_layer_1/name = "large_pellet"
 custom_data_layer_1/type = 1
+custom_data_layer_2/name = "pickup"
+custom_data_layer_2/type = 1
 sources/0 = SubResource("TileSetAtlasSource_u7ivr")
 
 [node name="Level1" type="Node"]
@@ -1382,3 +1389,6 @@ stream = ExtResource("8_dnyje")
 volume_db = -7.828
 
 [node name="HUD" parent="." instance=ExtResource("9_ebmw5")]
+
+[node name="PickUp" parent="." instance=ExtResource("10_07gjf")]
+position = Vector2(280, 110)

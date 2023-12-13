@@ -1,111 +1,58 @@
 extends CharacterBody2D
 
-#const DIRECTIONS := [Vector2.DOWN,Vector2.UP,Vector2.LEFT,Vector2.RIGHT]
+const DIRECTIONS := [Vector2.DOWN,Vector2.UP,Vector2.LEFT,Vector2.RIGHT]
 
-enum PickUpType {RED,YELLOW,PINK,ORANGE}
-#enum GhostMode {NORMAL,RUNNING,RUNNING_ENDING}
-
-@export var type := PickUpType.RED
 @export var speed := 70 
-@export var release_time := 1
-@export var eaten_time := 3
  
-var ghost_color := "red"
-#var inside_cage := true
-#var mode := GhostMode.NORMAL
-#var direction :=Vector2.UP
-#var start_position: Vector2
+var direction := Vector2.UP
+var start_position: Vector2
 
 @onready var animated_sprite_2d: AnimatedSprite2D = %AnimatedSprite2D
+@onready var stop_move: Timer = %StopMove
+@onready var visibility_timer: Timer = %VisibilityTimer
 
 func _ready() -> void:
-#	GameManager.pacman_died.connect(_restart)
-#	GameManager.running_mode_entered.connect(_on_running_mode_entered)
-#	GameManager.running_mode_ending.connect(_on_running_mode_ending)
-#	GameManager.running_mode_ended.connect(_on_running_mode_ended)
-	
-	ghost_color = _get_color()
-	await get_tree().create_timer(release_time).timeout
-#	_release_ghost()
-#	start_position = global_position
+	GameManager.pacman_died.connect(_restart)
+	start_position = global_position
+	animated_sprite_2d.set_visible(false)
 
-func _process(_delta: float) -> void:
-#	match mode:
-##		GhostMode.NORMAL:
-#			ghost_color = _get_color()
-##		GhostMode.RUNNING:
-#			ghost_color = "blue"
-##		GhostMode.RUNNING_ENDING:
-#			ghost_color = "flash"
-			
-	var animation_name := ghost_color + "_" 
-	animated_sprite_2d.play(animation_name)
+func _physics_process(delta: float) -> void:
+	var collision := move_and_collide(direction * speed * delta)
+	if collision:
+		direction = _get_next_direction()
 
-#func _physics_process(delta: float) -> void:
-#	var collision := move_and_collide(direction * speed * delta)
-#
-#	if collision:
-#		direction = _get_next_direction()
+func _get_next_direction() -> Vector2:
+	return DIRECTIONS.pick_random()
 
-func _get_color() -> String: 
-	match type:
-		PickUpType.RED:
-			return "red"
-		PickUpType.YELLOW:
-			return "yellow"
-		PickUpType.PINK:
-			return "pink"
-		_:
-			return "orange"
+func _restart() -> void:
+	speed = 70 
+	global_position = start_position
+	direction = DIRECTIONS.pick_random()
+	_get_next_direction()
 
-#func _get_direction_name() -> String:
-#	if direction == Vector2.UP:
-#		return "up"
-#	elif direction == Vector2.DOWN:
-#		return "down"
-#	elif direction == Vector2.LEFT:
-#		return "left"
+func _on_player_detector_body_entered(body: Node2D) -> void:
+	print("ETESG")
+	GameManager.score += 500
+	animated_sprite_2d.set_visible(false)
+	_restart()
+	animated_sprite_2d.play("cherry")
+#	if animated_sprite_2d == "apple":
+#		play("apple")
+#	elif animated_sprite_2d == "cherry":
+#		play("cherry")
+#	elif animated_sprite_2d == "pineapple":
+#		play("pineapple")
+#	elif animated_sprite_2d == "banana":
+#		play("banana")
 #	else:
-#		return "right"
+#		pass
 
-#func _release_ghost() -> void:
-#	set_collision_mask_value(5,false)
-#	gate_detector.monitoring = true
+func _on_stop_move_timeout() -> void:
+	speed = 0
+	animated_sprite_2d.set_visible(true)
+	visibility_timer.start()
+	print("START TIMER")
 
-#func _get_next_direction() -> Vector2:
-#	if inside_cage:
-#		if direction == Vector2.DOWN:
-#			return Vector2.UP
-#		else:
-#			return Vector2.DOWN
-#	else:
-#		return DIRECTIONS.pick_random()
-
-#func kill() -> void:
-#	global_position = start_position
-#	direction = Vector2.UP
-#	inside_cage = true
-#	set_collision_mask_value(5,true)
-#	await get_tree().create_timer(eaten_time).timeout
-#	_release_ghost()
-
-#func _on_running_mode_entered() -> void:
-#	mode = GhostMode.RUNNING
-#
-#func _on_running_mode_ending() -> void:
-#	mode = GhostMode.RUNNING_ENDING
-#
-#func _on_running_mode_ended() -> void:
-#	mode = GhostMode.NORMAL
-
-#func _on_gate_detector_body_exited(_body: Node2D) -> void:
-#	inside_cage = false
-#	set_collision_mask_value(5,true)
-#
-#func _restart() -> void:
-#	global_position = start_position
-#	direction = Vector2.UP
-#	inside_cage = true
-#	set_collision_mask_value(5,true)
-#	await get_tree().create_timer(release_time).timeout
-#	_release_ghost()
+func _on_visibility_timer_timeout() -> void:
+	print("TEIMEERAD")
+	_restart()
