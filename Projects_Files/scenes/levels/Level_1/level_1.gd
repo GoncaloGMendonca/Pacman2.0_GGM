@@ -27,7 +27,6 @@ func _physics_process(_delta: float) -> void:
 	elif data.get_custom_data("large_pellet"):
 		GameManager.eat_large_pellet()
 		tile_map.erase_cell(layer,tile)
-	
 
 func _on_running_mode_entered() -> void:
 	siren_sound.stop()

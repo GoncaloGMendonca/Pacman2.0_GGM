@@ -28,10 +28,11 @@ func _get_next_direction() -> Vector2:
 
 func _restart() -> void:
 	player_detector.set_collision_mask_value(2,false)
-	speed = 70 
+	speed = 90 
 	global_position = start_position
 	direction = DIRECTIONS.pick_random()
 	_get_next_direction()
+	animated_sprite_2d.set_visible(false)
 
 func _on_player_detector_body_entered(_body: Node2D) -> void:
 	GameManager.score += 500

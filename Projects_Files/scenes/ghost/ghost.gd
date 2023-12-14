@@ -20,10 +20,10 @@ var start_position: Vector2
 @onready var gate_detector: Area2D = %GateDetector
 
 func _ready() -> void:
-	GameManager.pacman_died.connect(_restart)
 	GameManager.running_mode_entered.connect(_on_running_mode_entered)
 	GameManager.running_mode_ending.connect(_on_running_mode_ending)
 	GameManager.running_mode_ended.connect(_on_running_mode_ended)
+	GameManager.pacman_died.connect(_restart)
 	
 	ghost_color = _get_color()
 	await get_tree().create_timer(release_time).timeout
@@ -104,6 +104,8 @@ func _on_gate_detector_body_exited(_body: Node2D) -> void:
 	set_collision_mask_value(5,true)
 
 func _restart() -> void:
+	if inside_cage:
+		return
 	global_position = start_position
 	direction = Vector2.UP
 	inside_cage = true

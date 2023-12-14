@@ -54,6 +54,7 @@ func _physics_process(delta: float) -> void:
 		previous_direction = direction 
 
 func _die() -> void:
+	GameManager.lives -= 1
 	death_sound.play()
 	animated_sprite_2d.pause()
 	var tween := get_tree().create_tween()
@@ -62,13 +63,19 @@ func _die() -> void:
 	call_deferred("set_process_mode",Node.PROCESS_MODE_DISABLED)
 
 func _restart() -> void:
+	GameManager.pacman_died.emit()
 	modulate = Color.WHITE
 	process_mode = Node.PROCESS_MODE_INHERIT
 	position = start_position
 	facing_direction = Direction.LEFT
 	animated_sprite_2d.play("left")
-	GameManager.lives -= 1
-	GameManager.pacman_died.emit()
+	
+	if GameManager.lives < 0:
+		if GameManager.score > SaveSystem.data.highscore:
+			SaveSystem.data.highscore = GameManager.score
+			SaveSystem.save_data()
+		
+		GameManager.restart_game()
 
 func _on_ghost_detector_body_entered(body: Node2D) -> void:
 	#collide com a ghost

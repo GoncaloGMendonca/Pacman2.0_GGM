@@ -9,6 +9,12 @@ var score := 0
 var lives := 3
 var is_running_mode := false
 
+func restart_game() -> void:
+	score = 0 
+	lives = 3
+	is_running_mode = false
+	get_tree().change_scene_to_file("res://scenes/Main_menu/main_menu.tscn")
+
 func eat_small_pellet() -> void:
 	score += 2
 
